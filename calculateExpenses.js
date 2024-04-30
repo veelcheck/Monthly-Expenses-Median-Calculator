@@ -124,6 +124,6 @@ const getMedian = (expenses) => {
   return median;
 };
 
-console.log(getMedian(expenses));
-console.log(getMedian(expenses2));
-console.log(getMedian(expenses3));
+console.log(getMedian(expenses)); // Expected output 11.72
+console.log(getMedian(expenses2)); // Expected output 15.36
+console.log(getMedian(expenses3)); // Expected output null
