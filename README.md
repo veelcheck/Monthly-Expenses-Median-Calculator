@@ -7,7 +7,7 @@ The application takes expense data structured in a JavaScript object where expen
 
 ### The process involves the following steps:
 
-1. **Reading Data**:  
+1. **Data Reading**:  
    Expense data is structured in JavaScript objects. Each object represents expenses for different dates within a month. Each date may have different arrays of category expenses.
 2. **Expense Concatenation**:  
    It concatenates expenses from each month up to and including the first Sunday. If no expenses in the object match the condition, the function returns null as instructed. The function also checks if the input arrays contain only numbers and acts accordingly if not. 

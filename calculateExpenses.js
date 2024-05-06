@@ -46,35 +46,21 @@ const expenses2 = {
       flowers: [300],
     },
     '31': {
-      food: [150]
-    }
+      food: [150],
+    },
   },
 };
 
-const expenses3 = {
-};
+const expenses3 = {};
 
-// Concats arrays to group daily expenses toghether.
-const concatArrays = (dayObject) => {
-  let concatenatedArray = [];
-
-  for (const category in dayObject) {
-    if (Array.isArray(dayObject[category])) {
-      concatenatedArray = concatenatedArray.concat(dayObject[category]);
-    }
-  }
-  // Makes sure all input is a number
-  concatenatedArray = concatenatedArray.map((value) => {
-    if (typeof value === 'string') {
-      // Convers to number and replaces any mistaken commas
-      return parseFloat(value.replace(',', '.'));
-    }
-
-    return value;
-  });
-
-  return concatenatedArray;
-};
+// Group daily expenses toghether and checks if all data is number.
+const getDailyExpenses = (dayObject) =>
+  Object
+    .values(dayObject)
+    .flat()
+    .map((value) =>
+      typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value
+    );
 
 //Gets the first Sunday in a month.
 const getFirstSunday = (dateString) => {
@@ -103,15 +89,15 @@ const getMedian = (expenses) => {
     for (const [day, categories] of Object.entries(days)) {
       // If the condition 'expenses until first Sunday' is met, the arrays are concated to the result.
       if (Number(day) <= firstSunday) {
-        result = result.concat(concatArrays(categories))
+        result = result.concat(getDailyExpenses(categories));
       }
     }
   }
   // If nothing matches the conditon, null is returned.
-    if (result.length === 0) {
-      return null;
-    }
-  
+  if (result.length === 0) {
+    return null;
+  }
+
   // Sorts the array ascendingly.
   const sortedResult = result.sort((a, b) => a - b);
   // Finds the middle index.
