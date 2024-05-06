@@ -45,7 +45,7 @@ const expenses2 = {
     '02': {
       flowers: [300],
     },
-    '31': {
+    31: {
       food: [150],
     },
   },
@@ -55,8 +55,7 @@ const expenses3 = {};
 
 // Group daily expenses toghether and checks if all data is number.
 const getDailyExpenses = (dayObject) =>
-  Object
-    .values(dayObject)
+  Object.values(dayObject)
     .flat()
     .map((value) =>
       typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value
@@ -88,9 +87,10 @@ const getMedian = (expenses) => {
 
     for (const [day, categories] of Object.entries(days)) {
       // If the condition 'expenses until first Sunday' is met, the arrays are concated to the result.
-      if (Number(day) <= firstSunday) {
-        result = result.concat(getDailyExpenses(categories));
-      }
+      result =
+        Number(day) <= firstSunday
+          ? result.concat(getDailyExpenses(categories))
+          : result;
     }
   }
   // If nothing matches the conditon, null is returned.
